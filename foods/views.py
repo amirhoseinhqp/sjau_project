@@ -1,4 +1,5 @@
 from django.shortcuts import render
+from django.urls import reverse
 from .models import food
 # Create your views here.
 
@@ -11,8 +12,8 @@ def food_list(request):
 
 def food_details(request , id):
 
-    food_detail = food.objects.get(id=id)
+    food_details = food.objects.get(id=id)
     context = {
-        "foods" : food_detail
+        "foods" : food_details
     }
     return render(request,"foods/details.html",context)

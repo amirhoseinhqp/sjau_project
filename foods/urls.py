@@ -4,5 +4,5 @@ app_name = "foods"
 
 urlpatterns = [
     path("",views.food_list,name = "food_list"),
-    path("<int:id>/",views.food_details,name = "detail")
+    path("<int:id>/",views.food_details,name = "food_details")
 ]

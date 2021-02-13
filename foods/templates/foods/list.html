@@ -117,16 +117,18 @@
 
 
 			{% for food in foods %}
-			<div class="col-lg-4 col-md-6 special-grid {{food.type_food}}">
-				<div class="gallery-single fix">
-					<img src="{{food.photo.url}}" class="img-fluid" alt="Image">
-					<div class="why-text">
-						<h4>{{food.name}}</h4>
-						<p>{{food.description}}</p>
-						<h5>{{food.price}} تومان</h5>
+				<a href="{{food.id}}">
+					<div class="col-lg-4 col-md-6 special-grid {{food.type_food}}">
+						<div class="gallery-single fix">
+							<img src="{{food.photo.url}}" class="img-fluid" alt="Image">
+							<div class="why-text">
+								<h4>{{food.name}}</h4>
+								<p>{{food.description}}</p>
+								<h5>{{food.price}} تومان</h5>
+							</div>
+						</div>
 					</div>
-			    </div>
-            </div>
+				</a>
 			{% endfor %}
 					
 				
