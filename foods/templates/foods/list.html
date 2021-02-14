@@ -1,4 +1,3 @@
-
 {% extends 'base.html' %}
 {% load static %}
 	
@@ -117,7 +116,7 @@
 
 
 			{% for food in foods %}
-				<a href="{{food.id}}">
+				<a href="{% url 'foods:food_details' food.id %}">
 					<div class="col-lg-4 col-md-6 special-grid {{food.type_food}}">
 						<div class="gallery-single fix">
 							<img src="{{food.photo.url}}" class="img-fluid" alt="Image">
