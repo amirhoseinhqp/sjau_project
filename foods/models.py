@@ -17,6 +17,10 @@ class food(models.Model):
     pop_date = models.DateField(_("تاریخ انتشار"),auto_now=False,auto_now_add=True)
     photo = models.ImageField(upload_to = 'foods/')
     type_food = models.CharField(_("نوع غذا"),max_length=10,choices=FOOD_TYPE,default="lunch")
+
+    class Meta:
+        verbose_name = "غذا"
+        verbose_name_plural = "غذاها"
     def __str__(self):
         return self.name
 

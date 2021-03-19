@@ -10,6 +10,10 @@ class reservation(models.Model):
     date = models.DateField(_("تاریخ"),auto_now=False,auto_now_add=False)
     time = models.TimeField(_("ساعت"),auto_now=False,auto_now_add=False)
 
+    class Meta:
+        verbose_name = "رزرو"
+        verbose_name_plural = "رزرو"
+
     def __str__(self):
         return self.email
 
