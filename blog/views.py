@@ -1,26 +1,26 @@
 from django.shortcuts import render
-from .models import blog , tag , category , comments
+from .models import Blog , Tag , Category , Comments
 from .forms import CommentForm
 from django.core.paginator import Paginator
 
 # Create your views here.
 
 def blog_list(request):
-    Blogs = blog.objects.all()
-    paginator = Paginator(Blogs,3)
+    blogs = Blog.objects.all()
+    paginator = Paginator(blogs,3)
     page_number = request.GET.get('page')
-    Blog_list = paginator.get_page(page_number)
+    blog_list = paginator.get_page(page_number)
     context = {
-        "Blog_list" : Blog_list
+        "Blog_list" : blog_list
     }
 
     return render(request,"blog/blog_list.html",context)
 def blog_detail(request, id):
-    Blog = blog.objects.get(id=id)
-    Tags = tag.objects.all().filter(blogs=Blog)
-    Recent = blog.objects.all().order_by("created_at")[:5]
-    Category = category.objects.all()
-    Comments = comments.objects.all().filter(Blog=Blog)
+    blog = Blog.objects.get(id=id)
+    tags = Tag.objects.all().filter(blogs=blog)
+    recent = Blog.objects.all().order_by("created_at")[:5]
+    category = Category.objects.all()
+    comments = Comments.objects.all().filter(blog=blog)
     
     if request.method == "POST":
         form = CommentForm(request.POST)
@@ -29,29 +29,29 @@ def blog_detail(request, id):
             new_email = form.cleaned_data["email"]
             new_message = form.cleaned_data["message"]
 
-            new_comment = comments(Blog=Blog,name=new_name,email=new_email,message=new_message)
+            new_comment = Comments(blog=blog,name=new_name,email=new_email,message=new_message)
             new_comment.save()
     context = {
-        "Blog" : Blog,
-        "Tags" : Tags,
-        "Recent" : Recent,
-        "Category" : Category,
-        "Comments" : Comments,
+        "Blog" : blog,
+        "Tags" : tags,
+        "Recent" : recent,
+        "Category" : category,
+        "Comments" : comments,
     }
     return render(request,"blog/blog_detail.html",context)
 
 def blog_tag(request,tag):
-    Blogs = blog.objects.filter(tags__slug=tag)
+    blogs = Blog.objects.filter(tags__slug=tag)
     context = {
-        "Blogs" : Blogs
+        "Blogs" : blogs
     }
 
     return render(request,"blog/blog_list.html",context)
 
 def blog_category(request,category):
-    Blogs = blog.objects.filter(Category__slug=category)
+    blogs = Blog.objects.filter(Category__slug=category)
     context = {
-        "Blogs" : Blogs
+        "Blogs" : blogs
     }
 
     return render(request,"blog/blog_list.html",context)
@@ -59,5 +59,5 @@ def blog_category(request,category):
 def search(request):
     if request.method == "GET":
         q = request.GET.get("search")
-    Blog_list = blog.objects.filter(title__icontains=q)
-    return render(request,"blog/blog_list.html",{"Blog_list":Blog_list})
+    blog_list = Blog.objects.filter(title__icontains=q)
+    return render(request,"blog/blog_list.html",{"Blog_list":blog_list})

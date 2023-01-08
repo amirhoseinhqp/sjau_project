@@ -1,19 +1,20 @@
+
 from django.shortcuts import render
-from .forms import reservationform
+from .forms import ReservationForm
 
 # Create your views here.
 
 def reserve(request):
-    reserve_form = reservationform()
+    reserve_form = ReservationForm()
     if request.method == "POST":
-        reserve_form = reservationform(request.POST)
+        reserve_form = ReservationForm(request.POST)
         if reserve_form.is_valid():
             reserve_form.save()
     else:
-        reserve_form = reservationform()
+        reserve_form = ReservationForm()
 
     context = {
-        "form" : reserve_form
+        "form":reserve_form,
     }
 
     return render(request,"reservation/reservation.html",context)

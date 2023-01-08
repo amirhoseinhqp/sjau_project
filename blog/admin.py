@@ -1,10 +1,10 @@
 from django.contrib import admin
-from .models import blog , category , tag , comments
+from .models import Category , Tag , Comments , Blog
 # Register your models here.
 #admin.site.register(blog)
-admin.site.register(category)
-admin.site.register(tag)
-admin.site.register(comments)
+admin.site.register(Category)
+admin.site.register(Tag)
+admin.site.register(Comments)
 
 class BlogAdmin(admin.ModelAdmin):
     list_display = ('title','created_at',"author")
@@ -13,4 +13,4 @@ class BlogAdmin(admin.ModelAdmin):
     ordering = ('title',)
     date_hierarchy = "created_at"
 
-admin.site.register(blog,BlogAdmin)
+admin.site.register(Blog,BlogAdmin)
